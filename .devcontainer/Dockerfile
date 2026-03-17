@@ -8,6 +8,8 @@ USER root
 
 ENV HOME=/home/jovyan
 ENV JUPYTER_RUNTIME_DIR=/home/jovyan/.local/share/jupyter/runtime
+ENV PROJ_DATA=/opt/conda/share/proj
+ENV GDAL_DATA=/opt/conda/share/gdal
 
 RUN apt-get update \
  && groupadd jovyan \
