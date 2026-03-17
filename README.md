@@ -26,7 +26,10 @@ This repository contains an R-based Jupyter workflow for typhoon-related mortali
 
    [http://localhost:8800/lab](http://localhost:8800/lab)
 
-4. Open `notebook/INLA_workflow.ipynb` and run the cells with the `R` kernel.
+4. Open one of the notebooks below and run the cells with the `R` kernel.
+
+   - `notebook/INLA_workflow.ipynb`: main INLA analysis workflow
+   - `notebook/descriptive_figures.ipynb`: descriptive maps and heatmaps exported as PDF figures
 
 ### Stop the Environment
 
@@ -48,13 +51,14 @@ docker compose logs -f lab
 - `data/gadm_cache/`: Additional geospatial cache files downloaded during map preparation.
 - `notebook/`: Jupyter notebooks for running and inspecting the analysis workflow.
 - `output/`: Generated CSV summaries and analysis results.
-- `output/fig/`: Exported figure files produced by the workflow.
+- `output/fig/`: Exported figure files produced by the workflow, including `descriptive.pdf` and `descriptive1.pdf`.
 - `src/`: R source files implementing the modular analysis pipeline and shared helper functions.
 - `docker-compose.yml`: Local service definition for starting JupyterLab.
 
 ## Main Files
 
 - `notebook/INLA_workflow.ipynb`: Main notebook for running the analysis end to end.
+- `notebook/descriptive_figures.ipynb`: Notebook for generating descriptive PDF figures from the sample dataset.
 - `src/inla_pipeline.R`: Main INLA pipeline for the young and elderly analyses.
 - `src/utils.R`: Shared utility functions for spatial processing, posterior summaries, and plotting.
 
@@ -62,3 +66,5 @@ docker compose logs -f lab
 
 - Required R packages are installed when the Docker image is built.
 - The sample input file currently included in this repository is `data/typhoon_mortality_dummy.csv`.
+- The repository includes a dummy dataset for sharing and testing, so rerunning the notebooks from this repository will not exactly reproduce the checked-in figures and result tables.
+- The files already included under `output/` and `output/fig/` were generated from the original non-public data rather than from the dummy dataset bundled here.
