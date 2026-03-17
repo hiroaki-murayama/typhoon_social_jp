@@ -1,0 +1,15 @@
+services:
+  lab:
+    image: jupyter_typhoon_social_jp:v01 
+    container_name: typhoon_social_jp_dev_container 
+    build:
+        context: .
+        dockerfile: ./.devcontainer/Dockerfile
+
+    ports:
+      - "8800:8888" # http://localhost:8800/lab to launch Jupyter Lab
+       
+    volumes:
+      - .:/home/jovyan/work
+
+    command: jupyter lab
