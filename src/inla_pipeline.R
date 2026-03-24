@@ -1,6 +1,6 @@
 # inla_pipeline.R (single source for young + elderly)
 run_inla_age <- function(age_group=c("young","eld"),
-                         data_file="../data/tc.mortality.week_final3.csv",
+                         data_file="../data/typhoon_mortality_dummy.csv",
                          repo_root=NULL,
                          out_dir="../output",
                          fig_dir="../output/fig",
