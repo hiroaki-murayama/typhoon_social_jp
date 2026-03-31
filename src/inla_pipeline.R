@@ -5,7 +5,9 @@ run_inla_age <- function(age_group=c("young","eld"),
                          out_dir="../output",
                          fig_dir="../output/fig",
                          threshold=17.2,
-                         nSamp=800L){
+                         nSamp=800L,
+                         seed=1L,
+                         num_threads=INLA::inla.getOption("num.threads")){
   age_group <- match.arg(age_group)
   if(!is.null(repo_root)) setwd(repo_root)
   if(!dir.exists(out_dir)) dir.create(out_dir, recursive=TRUE)
@@ -94,12 +96,22 @@ run_inla_age <- function(age_group=c("young","eld"),
 
   # ---- Fit INLA ----
   off <- log(df[[pop_col]])
+  set.seed(seed)
   res <- INLA::inla(as.formula(formula_txt), family="poisson", data=df, offset=off,
     control.compute=list(config=TRUE, dic=TRUE, waic=TRUE, cpo=TRUE),
-    control.predictor=list(compute=TRUE))
+    control.predictor=list(compute=TRUE),
+    num.threads=num_threads)
 
   # ---- Posterior excess deaths (prefecture-level) ----
-  post <- compute_excess_by_prefecture(res, df, pop_col=pop_col, lags=lags, soc_vars=soc_vars, nSamp=nSamp)
+  post <- compute_excess_by_prefecture(
+    res,
+    df,
+    pop_col=pop_col,
+    lags=lags,
+    soc_vars=soc_vars,
+    nSamp=nSamp,
+    seed=seed
+  )
   summary_by_region <- post$summary_by_region
 
   # Save prefecture-level posterior summary (matches your original output)
@@ -176,7 +188,7 @@ lags <- c("exp0","exp1","exp2")
 gamma_names <- as.vector(outer(lags, soc_vars, paste, sep=":"))
 terms <- c(lags, gamma_names)
 
-theta_samp <- extract_fixed_samples(res, terms=terms, nSamp=nSamp, seed=1)
+theta_samp <- extract_fixed_samples(res, terms=terms, nSamp=nSamp, seed=seed + 1L)
 # rows: terms, cols: samples
 
 beta_samp  <- theta_samp[lags, , drop=FALSE]         # 3 x nSamp

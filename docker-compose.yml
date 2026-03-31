@@ -12,4 +12,4 @@ services:
     volumes:
       - .:/home/jovyan/work
 
-    command: jupyter lab
+    command: jupyter lab --ServerApp.token='' --ServerApp.password=''

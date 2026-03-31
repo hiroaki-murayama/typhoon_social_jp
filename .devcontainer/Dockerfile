@@ -65,6 +65,7 @@ RUN mamba install -y -c conda-forge --override-channels \
  && jupyter lab build
 
 RUN Rscript /tmp/install-r-packages.R \
+ && find /opt/conda/lib/R/library/INLA/bin -type f \( -name 'inla*' -o -name 'fmesher*' \) -exec chmod a+rx {} + \
  && rm -f /tmp/install-r-packages.R
 
 RUN mkdir -p /home/jovyan/.local/share/jupyter/runtime \

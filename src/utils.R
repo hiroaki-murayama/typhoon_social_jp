@@ -202,7 +202,7 @@ extract_fixed_samples <- function(res, terms, nSamp=800L, seed=1){
   M
 }
 
-compute_excess_by_prefecture <- function(res, df, pop_col, lags, soc_vars, nSamp=800L){
+compute_excess_by_prefecture <- function(res, df, pop_col, lags, soc_vars, nSamp=800L, seed=1L){
   # Returns:
   #   exc: (nrow(df) x nSamp) posterior excess deaths
   #   summary_by_region: cumulative excess + mortality rate + IRR + posterior prob(excess>0)
@@ -212,7 +212,7 @@ compute_excess_by_prefecture <- function(res, df, pop_col, lags, soc_vars, nSamp
 
   gamma_names <- as.vector(outer(lags, soc_vars, paste, sep=":"))
   terms <- c(lags, gamma_names)
-  fx_samp <- extract_fixed_samples(res, terms=terms, nSamp=nSamp)
+  fx_samp <- extract_fixed_samples(res, terms=terms, nSamp=nSamp, seed=seed)
   # Linear predictor parts for lags and interactions
   beta_samp <- fx_samp[lags, , drop=FALSE]
   gamma_names <- as.vector(outer(lags, soc_vars, paste, sep=":"))
