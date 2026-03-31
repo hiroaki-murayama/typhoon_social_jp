@@ -51,8 +51,8 @@ docker compose logs -f lab
 - `data/gadm/`: Cached GADM boundary data.
 - `data/gadm_cache/`: Additional geospatial cache files downloaded during map preparation.
 - `notebook/`: Jupyter notebooks for running and inspecting the analysis workflow.
-- `output/`: Generated CSV summaries and analysis results, including `irr_soclag_prefecture_ci_young.csv` and `irr_soclag_prefecture_ci_eld.csv`.
-- `output/fig/`: Exported figure files produced by the workflow, including `descriptive.pdf` and `descriptive1.pdf`.
+- `output/`: Generated CSV summaries and analysis results.
+- `output/fig/`: Exported figure files produced by the workflow.
 - `src/`: R source files implementing the modular analysis pipeline and shared helper functions.
 - `docker-compose.yml`: Local service definition for starting JupyterLab.
 
